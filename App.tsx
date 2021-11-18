@@ -1,18 +1,20 @@
 import React, { ReactElement } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Note from './src/Components/Note';
 
 export default function App(): ReactElement {
   return (
-    <View style={styles.container}>
-      <Text>Welcome, </Text>
-    </View>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <Note initialTitleContent="" initialNoteContent="" />
+      </View>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

@@ -5,8 +5,7 @@ import 'react-native';
 import App from '../App';
 
 describe('app', () => {
-  it('displays a welcome message', () => {
-    const { getByText } = rntlRender(<App />);
-    getByText(/welcome/i);
+  it('has no error loading component', () => {
+    rntlRender(<App />);
   });
 });
