@@ -6,7 +6,7 @@ import Note from './src/Components/Note';
 export default function App(): ReactElement {
   return (
     <SafeAreaProvider>
-      <View style={styles.container}>
+      <View style={styles.container} testID="app">
         <Note initialTitleContent="" initialNoteContent="" />
       </View>
     </SafeAreaProvider>
