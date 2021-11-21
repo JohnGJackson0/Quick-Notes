@@ -1,10 +1,12 @@
-it('renders', () => {
-  cy.visit('/');
-  cy.get('[data-testid=app]').should('be.visible');
-});
+describe('app', () => {
+  it('renders', () => {
+    cy.visit('/');
+    cy.findByTestId('app').should('be.visible');
+  });
 
-it('shows notes on startup', () => {
-  cy.visit('/');
-  cy.get('[placeholder=title]').should('be.visible');
-  cy.get('[placeholder=content]').should('be.visible');
+  it('shows notes on startup', () => {
+    cy.visit('/');
+    cy.findByPlaceholderText('title').should('be.visible');
+    cy.findByPlaceholderText('content').should('be.visible');
+  });
 });

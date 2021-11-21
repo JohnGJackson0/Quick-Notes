@@ -58,3 +58,6 @@ web-build/
 /coverage/
 
 .vscode/
+
+cypress/videos
+cypress/screenshots
