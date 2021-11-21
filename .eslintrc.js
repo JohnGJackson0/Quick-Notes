@@ -1,9 +1,8 @@
 module.exports = {
-  root: true,
-  plugins: ['eslint-plugin-cypress'],
-  extends: ['react-native-typescript', 'plugin:cypress/recommended'],
-  env: { 'cypress/globals': true },
+  plugins: ['react', 'react-native'],
+  extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'warn',
     semi: ['error', 'always'],
     quotes: [
       2,
