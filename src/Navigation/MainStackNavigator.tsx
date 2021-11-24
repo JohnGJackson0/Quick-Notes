@@ -25,9 +25,7 @@ export const MainStackNavigator = () => (
 
 const styles = StyleSheet.create({
   header: {
-    fontWeight: '600',
     backgroundColor: getThemeColor('background'),
-    fontSize: 16,
   },
   headerTitle: {
     color: getThemeColor('text'),
