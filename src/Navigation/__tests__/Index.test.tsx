@@ -1,5 +1,5 @@
 import Navigation from '..';
-import { render as reduxRender, waitFor } from '../../../jest/ReduxRender';
+import { render as reduxRender, waitFor } from '../../../test-utils';
 import React from 'react';
 import 'react-native';
 
@@ -8,8 +8,8 @@ describe('MainStackNavigator', () => {
     const { getByPlaceholderText } = reduxRender(<Navigation />);
 
     await waitFor(() => {
-      getByPlaceholderText('title');
-      getByPlaceholderText('content');
+      getByPlaceholderText(/title/i);
+      getByPlaceholderText(/content/i);
     });
   });
 });

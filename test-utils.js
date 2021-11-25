@@ -1,17 +1,15 @@
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
-import notesReducer from '../src/Components/Note';
+import noteReducer from './src/Redux/NoteSlice';
 import { Provider } from 'react-redux';
 import { render as rntlRender } from '@testing-library/react-native';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 
 function render(
   ui,
   {
     preloadedState,
     store = configureStore({
-      reducer: { notes: notesReducer },
+      reducer: { tasks: noteReducer },
       preloadedState,
     }),
     ...renderOptions

@@ -12,7 +12,6 @@ export const MainStackNavigator = () => (
     <Stack.Screen
       name="Note"
       component={Note}
-      initialParams={{ initialNoteContent: '', initialTitleContent: '' }}
       options={{
         headerTitle: 'Edit Note',
         headerStyle: styles.header,

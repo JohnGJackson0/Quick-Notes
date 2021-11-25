@@ -6,25 +6,24 @@ import { RootState } from '../Redux/store';
 import { useAppDispatch, useAppSelector } from '../Hooks/redux';
 import { saveNote } from '../Redux/NoteSlice';
 import { HALF_MINUTE_TO_MS } from '../../constants/Constants';
+
 interface Props {
-  initialTitleContent: string;
-  initialNoteContent: string;
+  waitTime?: number;
 }
 
-const Note = ({
-  initialTitleContent,
-  initialNoteContent,
-}: Props): React.ReactElement => {
+const Note = ({ waitTime }: Props) => {
   const note = useAppSelector((state: RootState) => state.notes);
   const dispatch = useAppDispatch();
 
-  const [title, setTitle] = useState(note.title || initialTitleContent);
-  const [content, setContent] = useState(note.content || initialNoteContent);
+  const timeToWait = waitTime || HALF_MINUTE_TO_MS;
+
+  const [title, setTitle] = useState(note?.title || '');
+  const [content, setContent] = useState(note?.content || '');
 
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(saveNote({ title: title, content: content }));
-    }, HALF_MINUTE_TO_MS);
+    }, timeToWait);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +45,7 @@ const Note = ({
         multiline={true}
         underlineColorAndroid="transparent"
       />
-      <Text style={styles.text}>{note.savedMessage}</Text>
+      <Text style={styles.text}>{note?.savedMessage || 'never saved'}</Text>
     </Screen>
   );
 };

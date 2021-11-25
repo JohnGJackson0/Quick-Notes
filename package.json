@@ -20,7 +20,7 @@
     "validate": "npm run check-types && npm run check-format && npm run lint && npm run test"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-async-storage/async-storage": "^1.15.12",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.0.6",
@@ -88,9 +88,9 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 100,
+        "statements": 90,
         "branches": 100,
-        "functions": 100,
+        "functions": 90,
         "lines": 100
       }
     },
