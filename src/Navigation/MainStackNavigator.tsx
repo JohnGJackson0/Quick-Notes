@@ -1,9 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Note from '../Components/Note';
-import { StyleSheet } from 'react-native';
-import { getThemeColor } from '../Theme/getTheme';
 import { MainStackNavigatorParamList } from './Types';
+import NoteHeader from '../Components/NoteHeader';
 
 const Stack = createNativeStackNavigator<MainStackNavigatorParamList>();
 
@@ -14,19 +13,8 @@ export const MainStackNavigator = () => (
       component={Note}
       options={{
         headerTitle: 'Edit Note',
-        headerStyle: styles.header,
-        headerTitleStyle: styles.headerTitle,
-        headerTintColor: getThemeColor('text'),
+        header: () => <NoteHeader />,
       }}
     />
   </Stack.Navigator>
 );
-
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: getThemeColor('background'),
-  },
-  headerTitle: {
-    color: getThemeColor('text'),
-  },
-});

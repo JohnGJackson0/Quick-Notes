@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './src/Redux/store';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import ThemeProvider from './src/Theme/ThemeProvider';
 
 export const persistor = persistStore(store);
 
@@ -14,9 +15,11 @@ export default function App() {
     <PersistGate persistor={persistor}>
       <Provider store={store}>
         <SafeAreaProvider>
-          <View style={styles.container} testID="app">
-            <Navigation />
-          </View>
+          <ThemeProvider>
+            <View style={styles.container} testID="app">
+              <Navigation />
+            </View>
+          </ThemeProvider>
         </SafeAreaProvider>
       </Provider>
     </PersistGate>

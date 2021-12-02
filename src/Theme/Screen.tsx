@@ -7,26 +7,24 @@ import {
   ViewStyle,
   View,
 } from 'react-native';
-import { getThemeColor } from '../Theme/getTheme';
+import { ColorsType } from '../../constants/Colors';
+import { ThemeContext } from './types';
+import { withTheme } from './withTheme';
 
 interface Props extends ViewProps {
+  themeContext: ThemeContext;
   scroll?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
-export const Screen: React.FC<Props> = ({ scroll, style, children }) => {
-  const backgroundColor = getThemeColor('background');
+const Screen: React.FC<Props> = ({ scroll, style, children, themeContext }) => {
+  const colors = themeContext.colors;
 
   return scroll ? (
     <ScrollView
       testID="scrollview-screen"
-      contentContainerStyle={styles.contentContainer}
-      style={[
-        styles.container,
-        styles.scrollcontainer,
-        { backgroundColor },
-        style,
-      ]}
+      contentContainerStyle={styles(colors).contentContainer}
+      style={[styles(colors).container, styles(colors).scrollcontainer, style]}
       showsVerticalScrollIndicator={false}
     >
       {children}
@@ -34,33 +32,29 @@ export const Screen: React.FC<Props> = ({ scroll, style, children }) => {
   ) : (
     <View
       testID="view-screen"
-      style={[
-        styles.container,
-        styles.viewContainer,
-        { backgroundColor },
-        style,
-      ]}
+      style={[styles(colors).container, styles(colors).viewContainer, style]}
     >
       {children}
     </View>
   );
 };
-export default Screen;
+export default withTheme(Screen);
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: getThemeColor('background'),
-  },
-  scrollcontainer: {
-    flex: 1,
-    paddingTop: 36,
-    paddingBottom: 36,
-    paddingLeft: 14,
-  },
-  viewContainer: {
-    flex: 1,
-  },
-  contentContainer: {
-    paddingBottom: 36,
-  },
-});
+const styles = (colors: ColorsType) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: colors.background,
+    },
+    scrollcontainer: {
+      flex: 1,
+      paddingTop: 36,
+      paddingBottom: 36,
+      paddingLeft: 14,
+    },
+    viewContainer: {
+      flex: 1,
+    },
+    contentContainer: {
+      paddingBottom: 36,
+    },
+  });

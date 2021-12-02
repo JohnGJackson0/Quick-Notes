@@ -1,58 +1,38 @@
 export interface ColorsType {
   primary: string;
-  text: string;
+  secondary: string;
   background: string;
-  textBackground: string;
-  tint: string;
-  card: string;
+  surface: string;
+  error: string;
+  text: string;
+  textSecondary: string;
   hover: string;
   secondaryText: string;
   button: string;
-  completedBackground: string;
-  completedPrimary: string;
 }
 
-const primary = '#463FB0';
-
-const dark: ColorsType = {
-  primary,
-  text: '#FFFFFF',
-  background: '#rgb(24,32,42)',
-  textBackground: '#283340',
-  tint: primary,
-  card: '#192734',
+export const DARK: ColorsType = {
+  primary: '#BB86FC',
+  secondary: '#03DAC6',
+  background: '#121212',
+  surface: '#1E1E1E',
+  error: '#B00020',
+  text: '#E1E1E1',
+  textSecondary: '#808080',
   hover: '#22303C',
   secondaryText: '#8899A6',
   button: '#47A1EB',
-  completedBackground: primary,
-  completedPrimary: '#FFFFFF',
 };
 
-const light: ColorsType = {
-  primary,
+export const LIGHT: ColorsType = {
+  primary: '#6200EE',
+  secondary: '#03DAC6',
+  background: '#FFFFFF',
+  surface: '#FFFFFF',
+  error: '#B00020',
   text: '#4A5784',
-  background: '#F2F2F2',
-  textBackground: '#000000',
-  tint: primary,
-  card: '#000000',
+  textSecondary: '#808080',
   hover: '#22303C',
   secondaryText: '#4A5784',
   button: '#463FB0',
-  completedBackground: primary,
-  completedPrimary: '#FFFFFF',
 };
-
-// eslint-disable-next-line no-shadow
-export const enum varients {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
-
-const theme = new Map([
-  [varients.DARK, dark],
-  [varients.LIGHT, light],
-]);
-
-export default function getColors(): Map<varients, ColorsType> {
-  return theme;
-}
