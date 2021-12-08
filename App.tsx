@@ -7,6 +7,7 @@ import { store } from './src/Redux/store';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import ThemeProvider from './src/Theme/ThemeProvider';
+import { Host } from 'react-native-portalize';
 
 export const persistor = persistStore(store);
 
@@ -16,9 +17,11 @@ export default function App() {
       <Provider store={store}>
         <SafeAreaProvider>
           <ThemeProvider>
-            <View style={styles.container} testID="app">
-              <Navigation />
-            </View>
+            <Host>
+              <View style={styles.container} testID="app">
+                <Navigation />
+              </View>
+            </Host>
           </ThemeProvider>
         </SafeAreaProvider>
       </Provider>

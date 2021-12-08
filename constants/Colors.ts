@@ -12,7 +12,7 @@ export interface ColorsType {
 }
 
 export const DARK: ColorsType = {
-  primary: '#BB86FC',
+  primary: '#FBC02D',
   secondary: '#03DAC6',
   background: '#121212',
   surface: '#1E1E1E',

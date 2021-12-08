@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { LIGHT } from '../../constants/Colors';
+import { DARK } from '../../constants/Colors';
 export const ThemeContext = React.createContext({
   themeContext: {
-    colors: LIGHT,
+    colors: DARK,
   },
 });

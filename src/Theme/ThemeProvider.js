@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LIGHT } from '../../constants/Colors';
+import { DARK } from '../../constants/Colors';
 import { ThemeContext } from './ThemeContext';
 
 export default class ThemeProvider extends React.Component {
@@ -7,7 +7,7 @@ export default class ThemeProvider extends React.Component {
     super();
     this.state = {
       setColor: this.setColor.bind(this),
-      colors: LIGHT,
+      colors: DARK,
     };
   }
   setColor(colors) {

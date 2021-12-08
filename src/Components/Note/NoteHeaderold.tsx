@@ -3,22 +3,40 @@ import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Modalize } from 'react-native-modalize';
 import NoteSettings from './NoteSettings';
-import { ThemeContext } from '../Theme/types';
-import { withTheme } from '../Theme/withTheme';
-import { ColorsType } from '../../constants/Colors';
+import { ThemeContext } from '../../Theme/types';
+import { withTheme } from '../../Theme/withTheme';
+import { ColorsType } from '../../../constants/Colors';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 interface Props {
   themeContext: ThemeContext;
+  navigation: NavigationProp<ParamListBase>;
 }
 
-const NoteHeader = ({ themeContext }: Props) => {
+const NoteHeader = ({ themeContext, navigation }: Props) => {
   const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
+  const BACK_ICON = 'arrow-back-ios';
   const modalizeRef = useRef<Modalize>(null);
   const colors = themeContext.colors;
 
   return (
     <View style={styles(colors).header}>
-      <Text style={styles(colors).headerTitle}>Edit Note</Text>
+      <Pressable
+        onPress={() => {
+          goBack();
+        }}
+      >
+        <View style={styles(colors).backContainer}>
+          <MaterialIcons
+            style={styles(colors).back}
+            name={BACK_ICON}
+            size={20}
+            color={colors.primary}
+          />
+          <Text style={styles(colors).backLabel}>Notes</Text>
+        </View>
+      </Pressable>
+
       <Pressable
         testID="MoreIcon"
         onPress={() => {
@@ -28,7 +46,7 @@ const NoteHeader = ({ themeContext }: Props) => {
         <MaterialIcons
           style={styles(colors).more}
           name={MORE_ICON}
-          size={25}
+          size={20}
           color={colors.primary}
         />
       </Pressable>
@@ -48,18 +66,27 @@ const styles = (colors: ColorsType) =>
     header: {
       backgroundColor: colors.background,
       flexDirection: 'row',
-    },
-    headerTitle: {
-      color: colors.text,
-      fontSize: 20,
-      margin: 10,
-      marginLeft: 25,
-      flexGrow: 1,
+      width: '100%',
+      justifyContent: 'space-between',
     },
     more: {
       margin: 10,
       marginRight: 20,
       alignSelf: 'flex-end',
+    },
+    backContainer: {
+      alignSelf: 'flex-start',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingRight: 5,
+    },
+    back: {
+      margin: 10,
+      marginLeft: 20,
+    },
+    backLabel: {
+      fontSize: 18,
+      color: colors.primary,
     },
     modalText: {
       alignSelf: 'center',

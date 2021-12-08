@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ColorsType } from '../../constants/Colors';
-import { ThemeContext } from '../Theme/types';
-import { withTheme } from '../Theme/withTheme';
-import ThemeSettings from './Settings/ThemeSettings';
+import { ColorsType } from '../../../constants/Colors';
+import { ThemeContext } from '../../Theme/types';
+import { withTheme } from '../../Theme/withTheme';
+import ThemeSettings from '../Settings/ThemeSettings';
 
 interface Props {
   themeContext: ThemeContext;
 }
 
-const NoteSettings = ({ themeContext }: Props) => {
+const NoteListSettings = ({ themeContext }: Props) => {
   const colors = themeContext.colors;
 
   return (
@@ -33,4 +33,4 @@ const styles = (colors: ColorsType) =>
     },
   });
 
-export default withTheme(NoteSettings);
+export default withTheme(NoteListSettings);

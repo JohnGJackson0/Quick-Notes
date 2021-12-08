@@ -1,9 +1,9 @@
 import React from 'react';
 import 'react-native';
 import { Platform } from 'react-native';
-import { render, fireEvent, waitFor } from '../../../jest/reduxRender';
+import { render, fireEvent, waitFor } from '../../../../jest/reduxRender';
 import '@testing-library/jest-dom';
-import NoteHeader from '../NoteHeader';
+import NoteHeader from '../NoteHeaderold';
 
 const setPlatform = function (platform) {
   Object.defineProperty(Platform, 'OS', {
@@ -14,7 +14,7 @@ const setPlatform = function (platform) {
 describe('NoteHeader', () => {
   it('renders', () => {
     const { getByText } = render(<NoteHeader />);
-    getByText(/Edit/i);
+    getByText(/Notes/i);
   });
   it('displays note settings on press', async () => {
     const { getByTestId, getByText } = render(<NoteHeader />);

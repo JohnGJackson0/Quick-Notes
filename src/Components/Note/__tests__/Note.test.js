@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native';
 import Note from '../Note';
-import { render, fireEvent, waitFor } from '../../../jest/reduxRender';
+import { render, fireEvent, waitFor } from '../../../../jest/reduxRender';
 import * as redux from 'react-redux';
 import '@testing-library/jest-dom';
 
