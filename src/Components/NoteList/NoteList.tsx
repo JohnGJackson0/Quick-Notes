@@ -57,6 +57,10 @@ const NoteList = ({ themeContext, navigation }: Props) => {
       notes?.forEach((item, index) => {
         if (item.neverOpened === true) {
           setListenForNewNoteAddedToRedux(false);
+          /**
+           * neverOpened: it allows us to select the new note in the state list
+           *              to open it as redux is ready
+           */
           dispatch(updateNeverOpened({ uid: item.uid }));
           navigation.navigate('Note', {
             position: index,
@@ -108,7 +112,11 @@ const NoteList = ({ themeContext, navigation }: Props) => {
           centerMenu={
             <Text style={styles(colors).text}>Notes {notes?.length || 0}</Text>
           }
-          rightActionIcon={<MenuIcon iconName="add-circle" />}
+          rightActionIcon={
+            <View testID="addNewItem">
+              <MenuIcon iconName="add-circle" />
+            </View>
+          }
           rightAction={createNewNote}
         />
       </View>

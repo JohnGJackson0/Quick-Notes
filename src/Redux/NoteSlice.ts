@@ -50,6 +50,7 @@ export const noteSlice = createSlice({
       state.notes.forEach((item, index) => {
         if (item.uid === state.currentNoteUid) {
           state.notes.splice(index, 1);
+          state.currentNoteUid = '';
         }
       });
     },

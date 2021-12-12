@@ -15,6 +15,7 @@ const CurrentNoteSettings = () => {
         navigate('NoteList');
       }}
       style={styles.container}
+      testID="DeleteNote"
     >
       <OutlinedButton title="DELETE NOTE" />
     </Pressable>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TextInput, Text, AppState } from 'react-native';
+import { StyleSheet, TextInput, Text } from 'react-native';
 import { RootState } from '../../Redux/store';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { saveNote, updateCurrentNote } from '../../Redux/NoteSlice';
@@ -8,18 +8,16 @@ import { withTheme } from '../../Theme/withTheme';
 import { ColorsType } from '../../../constants/Colors';
 import { ThemeContext } from '../../Theme/types';
 import Screen from '../../Theme/Screen';
-import { NavigationProp, ParamListBase } from '@react-navigation/core';
 
 interface Props {
   waitTime?: number;
   themeContext: ThemeContext;
-  navigation: NavigationProp<ParamListBase>;
+  route: { params: { position: number } };
 }
 
-const Note = ({ waitTime, themeContext, navigation }: Props) => {
+const Note = ({ waitTime, themeContext, route }: Props) => {
   const colors = themeContext.colors;
-
-  const position = navigation.getState().routes[1].params.position;
+  const { position } = route.params;
 
   const note = useAppSelector(
     (state: RootState) => state.notes.notes[position]

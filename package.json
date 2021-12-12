@@ -90,14 +90,6 @@
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 90,
-        "branches": 100,
-        "functions": 90,
-        "lines": 100
-      }
-    },
     "moduleNameMapper": {
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
     },

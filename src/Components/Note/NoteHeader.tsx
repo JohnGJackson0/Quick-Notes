@@ -23,9 +23,9 @@ const NoteHeader = ({ themeContext, navigation }: Props) => {
     <Menu
       leftMenu={
         <Pressable
+          testID="BackButton"
           onPress={() => {
-            //todo save note first
-
+            //todo go back
             navigation.goBack();
           }}
         >
@@ -40,6 +40,7 @@ const NoteHeader = ({ themeContext, navigation }: Props) => {
           onPress={() => {
             modalizeRef.current?.open();
           }}
+          testID="MoreIcon"
         >
           <MenuIcon
             iconName={Platform.OS === 'ios' ? 'more-horiz' : 'more-vert'}

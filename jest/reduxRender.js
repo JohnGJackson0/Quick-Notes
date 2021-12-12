@@ -9,7 +9,7 @@ function render(
   {
     preloadedState,
     store = configureStore({
-      reducer: { note: noteReducer },
+      reducer: { notes: noteReducer },
       preloadedState,
     }),
     ...renderOptions

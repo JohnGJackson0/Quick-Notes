@@ -1,6 +1,6 @@
 export type NO_PARAMS = undefined;
 
 export type MainStackNavigatorParamList = {
-  NoteList: NO_PARAMS;
+  NoteList: { position: number };
   Note: NO_PARAMS;
 };
