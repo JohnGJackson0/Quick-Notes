@@ -8,10 +8,16 @@ export default class ThemeProvider extends React.Component {
     this.state = {
       setColor: this.setColor.bind(this),
       colors: DARK,
+      //lighter theme vs darker theme
+      isLight: false,
+      setIsLight: this.setIsLight.bind(this),
     };
   }
   setColor(colors) {
     this.setState({ colors });
+  }
+  setIsLight(isLight) {
+    this.setState({ isLight });
   }
   render() {
     return (

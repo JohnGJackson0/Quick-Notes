@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Pressable,
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { RootState } from '../../Redux/store';
@@ -34,9 +35,10 @@ const transformNotes = (
     id: string;
   }[] = [];
   notes?.forEach((item) => {
+    const stripedHtml = item.content.replace(/<[^>]+>/g, '');
     result.push({
       data: {
-        title: `${item.content.substring(0, 25)}`,
+        title: `${stripedHtml.substring(0, 25)}`,
         savedMessage: `${item.savedMessage}`,
       },
       id: `${item.uid}`,
@@ -92,8 +94,8 @@ const NoteList = ({ themeContext, navigation }: Props) => {
       transformNotes(notes).length === 0 ? (
         <Text style={styles(colors).text}>
           There are no notes.{' \n\n'}Press the{' '}
-          <MenuIcon iconName="add-circle" margin="0" /> circle in the bottom
-          right corner to make a note.
+          <MenuIcon iconName="add-circle" /> in the bottom right corner to make
+          a note.
         </Text>
       ) : (
         <FlatList
@@ -110,14 +112,19 @@ const NoteList = ({ themeContext, navigation }: Props) => {
       <View style={styles(colors).menu}>
         <Menu
           centerMenu={
-            <Text style={styles(colors).text}>Notes {notes?.length || 0}</Text>
+            <Text style={styles(colors).text}>
+              Notes {notes?.length || '0'}
+            </Text>
           }
-          rightActionIcon={
-            <View testID="addNewItem">
+          rightMenu={
+            <Pressable
+              onPress={createNewNote}
+              testID="addNewItem"
+              style={styles(colors).add}
+            >
               <MenuIcon iconName="add-circle" />
-            </View>
+            </Pressable>
           }
-          rightAction={createNewNote}
         />
       </View>
     </Screen>
@@ -141,13 +148,17 @@ const styles = (colors: ColorsType) =>
     },
     menu: {
       flex: 1,
+      width: '100%',
       justifyContent: 'flex-end',
       alignContent: 'flex-end',
     },
     more: {
-      margin: 10,
+      padding: 5,
       marginRight: 20,
       alignSelf: 'flex-end',
+    },
+    add: {
+      padding: 5,
     },
   });
 

@@ -19,6 +19,7 @@ const ThemeSettings = ({ themeContext }: Props) => {
           testID="light"
           onPress={() => {
             themeContext.setColor(LIGHT);
+            themeContext.setIsLight(true);
           }}
         >
           <ThemeCircle color="#FFFFFF" invertedBorderColor="#121212" />
@@ -27,6 +28,7 @@ const ThemeSettings = ({ themeContext }: Props) => {
           testID="dark"
           onPress={() => {
             themeContext.setColor(DARK);
+            themeContext.setIsLight(false);
           }}
         >
           <ThemeCircle color="#121212" invertedBorderColor="#FFFFFF" />

@@ -10,6 +10,8 @@ import { withTheme } from '../../Theme/withTheme';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Portal } from 'react-native-portalize';
 import NoteSettings from './NoteSettings/NoteSettings';
+import { useAppDispatch } from '../../Hooks/redux';
+import { updateIsEditing } from '../../Redux/NoteSlice';
 
 interface Props {
   themeContext: ThemeContext;
@@ -19,45 +21,54 @@ interface Props {
 const NoteHeader = ({ themeContext, navigation }: Props) => {
   const colors = themeContext.colors;
   const modalizeRef = useRef<Modalize>(null);
+  const dispatch = useAppDispatch();
+
   return (
-    <Menu
-      leftMenu={
-        <Pressable
-          testID="BackButton"
-          onPress={() => {
-            //todo go back
-            navigation.goBack();
-          }}
-        >
-          <IconWithLabel
-            icon={<MenuIcon iconName="arrow-back-ios" />}
-            label="Notes"
-          />
-        </Pressable>
-      }
-      rightMenu={
-        <Pressable
-          onPress={() => {
-            modalizeRef.current?.open();
-          }}
-          testID="MoreIcon"
-        >
-          <MenuIcon
-            iconName={Platform.OS === 'ios' ? 'more-horiz' : 'more-vert'}
-          />
-          <Portal>
-            <Modalize
-              snapPoint={300}
-              ref={modalizeRef}
-              modalStyle={styles(colors).modal}
-              handleStyle={styles(colors).modalHandle}
-            >
-              <NoteSettings />
-            </Modalize>
-          </Portal>
-        </Pressable>
-      }
-    />
+    <Pressable
+      onPress={() => {
+        dispatch(updateIsEditing({ isEditing: false }));
+      }}
+    >
+      <Menu
+        leftMenu={
+          <Pressable
+            testID="BackButton"
+            onPress={() => {
+              //todo go back
+              navigation.goBack();
+            }}
+          >
+            <IconWithLabel
+              icon={<MenuIcon iconName="arrow-back-ios" />}
+              label="Notes"
+            />
+          </Pressable>
+        }
+        rightMenu={
+          <Pressable
+            onPress={() => {
+              dispatch(updateIsEditing({ isEditing: false }));
+              modalizeRef.current?.open();
+            }}
+            testID="MoreIcon"
+          >
+            <MenuIcon
+              iconName={Platform.OS === 'ios' ? 'more-horiz' : 'more-vert'}
+            />
+            <Portal>
+              <Modalize
+                snapPoint={300}
+                ref={modalizeRef}
+                modalStyle={styles(colors).modal}
+                handleStyle={styles(colors).modalHandle}
+              >
+                <NoteSettings />
+              </Modalize>
+            </Portal>
+          </Pressable>
+        }
+      />
+    </Pressable>
   );
 };
 
@@ -70,7 +81,6 @@ const styles = (colors: ColorsType) =>
       justifyContent: 'space-between',
     },
     more: {
-      margin: 10,
       marginRight: 20,
       alignSelf: 'flex-end',
     },
@@ -81,7 +91,6 @@ const styles = (colors: ColorsType) =>
       paddingRight: 5,
     },
     back: {
-      margin: 10,
       marginLeft: 20,
     },
     backLabel: {

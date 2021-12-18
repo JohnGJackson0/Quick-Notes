@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { withTheme } from '../withTheme';
 import { ColorsType } from '../../../constants/Colors';
 import { ThemeContext } from '../types';
+import { MENU_HEIGHT } from '../../../constants/Constants';
 
 interface Props {
   themeContext: ThemeContext;
   leftMenu: React.ReactNode;
   centerMenu: React.ReactNode;
   rightMenu: React.ReactNode;
-  rightActionIcon: React.ReactNode;
-  rightAction: () => void;
 }
 
 const Menu: React.FC<Props> = ({
@@ -18,35 +17,14 @@ const Menu: React.FC<Props> = ({
   leftMenu,
   rightMenu,
   centerMenu,
-  rightActionIcon,
-  rightAction,
 }) => {
   const colors = themeContext.colors;
 
   return (
     <View style={styles(colors).container}>
       <View>{leftMenu}</View>
-
       <View>{centerMenu}</View>
-
-      <View>
-        {!rightAction ? (
-          <>{rightMenu}</>
-        ) : (
-          <View>
-            {rightMenu}
-            <Pressable
-              onPress={() => {
-                rightAction();
-              }}
-            >
-              <View style={styles(colors).iconContainer}>
-                {rightActionIcon}
-              </View>
-            </Pressable>
-          </View>
-        )}
-      </View>
+      <View>{rightMenu}</View>
     </View>
   );
 };
@@ -58,15 +36,17 @@ const styles = (colors: ColorsType) =>
       flexDirection: 'row',
       width: '100%',
       justifyContent: 'space-between',
-      height: 50,
-      alignItems: 'center',
+      height: MENU_HEIGHT,
+      alignItems: 'flex-end',
+      padding: 10,
     },
     contentModalContainer: {
       backgroundColor: colors.background,
     },
     iconContainer: {
       margin: 10,
-      marginRight: 20,
+      paddingRight: 40,
+      width: 'auto',
       alignSelf: 'flex-end',
     },
     modal: {

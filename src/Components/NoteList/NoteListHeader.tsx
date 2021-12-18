@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Platform, Pressable, StyleSheet } from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { ColorsType } from '../../../constants/Colors';
 import Menu from '../../Theme/Menu/Menu';
@@ -20,6 +20,7 @@ const NoteHeader = ({ themeContext }: Props) => {
     <Menu
       rightMenu={
         <Pressable
+          style={styles(colors).backContainer}
           onPress={() => {
             modalizeRef.current?.open();
           }}
@@ -52,15 +53,11 @@ const styles = (colors: ColorsType) =>
       justifyContent: 'space-between',
     },
     more: {
-      margin: 10,
       marginRight: 20,
       alignSelf: 'flex-end',
     },
     backContainer: {
-      alignSelf: 'flex-start',
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingRight: 5,
+      margin: 10,
     },
     back: {
       margin: 10,
