@@ -4,6 +4,7 @@ import { ColorsType, LIGHT, DARK } from '../../../constants/Colors';
 import { ThemeContext } from '../../Theme/types';
 import { withTheme } from '../../Theme/withTheme';
 import ThemeCircle from './ThemeCircle';
+import { navigate } from '../../Navigation/RootNavigation';
 
 interface Props {
   themeContext: ThemeContext;
@@ -18,8 +19,11 @@ const ThemeSettings = ({ themeContext }: Props) => {
         <Pressable
           testID="light"
           onPress={() => {
-            themeContext.setColor(LIGHT);
-            themeContext.setIsLight(true);
+            if (!themeContext.isLight) {
+              themeContext.setColor(LIGHT);
+              themeContext.setIsLight(true);
+              navigate('NoteList');
+            }
           }}
         >
           <ThemeCircle color="#FFFFFF" invertedBorderColor="#121212" />
@@ -27,8 +31,11 @@ const ThemeSettings = ({ themeContext }: Props) => {
         <Pressable
           testID="dark"
           onPress={() => {
-            themeContext.setColor(DARK);
-            themeContext.setIsLight(false);
+            if (themeContext.isLight) {
+              themeContext.setColor(DARK);
+              themeContext.setIsLight(false);
+              navigate('NoteList');
+            }
           }}
         >
           <ThemeCircle color="#121212" invertedBorderColor="#FFFFFF" />
