@@ -79,6 +79,7 @@ const Note = ({ waitTime, themeContext, route }: Props) => {
             onPress={() => {
               dispatch(updateIsEditing({ isEditing: true }));
             }}
+            testID="editor"
           >
             <QuillEditor
               style={styles(colors).richEditor}

@@ -25,6 +25,7 @@ const NoteHeader = ({ themeContext, navigation }: Props) => {
 
   return (
     <Pressable
+      testID="noteHeader"
       onPress={() => {
         dispatch(updateIsEditing({ isEditing: false }));
       }}

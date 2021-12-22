@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { ColorsType } from '../../../constants/Colors';
 import Menu from '../../Theme/Menu/Menu';
@@ -20,7 +20,8 @@ const NoteHeader = ({ themeContext }: Props) => {
     <Menu
       rightMenu={
         <Pressable
-          style={styles(colors).backContainer}
+          testID="moreIcon"
+          style={styles(colors).moreIcon}
           onPress={() => {
             modalizeRef.current?.open();
           }}
@@ -46,31 +47,8 @@ const NoteHeader = ({ themeContext }: Props) => {
 
 const styles = (colors: ColorsType) =>
   StyleSheet.create({
-    header: {
-      backgroundColor: colors.background,
-      flexDirection: 'row',
-      width: '100%',
-      justifyContent: 'space-between',
-    },
-    more: {
-      marginRight: 20,
-      alignSelf: 'flex-end',
-    },
-    backContainer: {
+    moreIcon: {
       margin: 10,
-    },
-    back: {
-      margin: 10,
-      marginLeft: 20,
-    },
-    backLabel: {
-      fontSize: 18,
-      color: colors.primary,
-    },
-    modalText: {
-      alignSelf: 'center',
-      justifyContent: 'center',
-      color: colors.text,
     },
     modal: {
       backgroundColor: colors.background,

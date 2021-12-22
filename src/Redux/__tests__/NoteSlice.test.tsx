@@ -3,6 +3,7 @@ import reducer, {
   deleteCurrentNote,
   saveNote,
   updateCurrentNote,
+  updateIsEditing,
   updateNeverOpened,
 } from '../NoteSlice';
 
@@ -25,6 +26,7 @@ describe('Note slice', () => {
     expect(reducer(undefined, {})).toEqual({
       currentNoteUid: '',
       notes: [],
+      isEditing: false,
     });
   });
 
@@ -269,6 +271,22 @@ describe('Note slice', () => {
         },
       ],
       currentNoteUid: '2',
+    });
+  });
+
+  it('updates the isEditing flag', () => {
+    const previousState = {
+      notes: [],
+      currentNoteUid: '2',
+      isEditing: true,
+    };
+
+    expect(
+      reducer(previousState, updateIsEditing({ isEditing: false }))
+    ).toEqual({
+      notes: [],
+      currentNoteUid: '2',
+      isEditing: false,
     });
   });
 });
