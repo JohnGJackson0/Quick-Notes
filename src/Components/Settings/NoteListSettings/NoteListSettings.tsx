@@ -14,7 +14,7 @@ const NoteListSettings = ({ themeContext }: Props) => {
   const colors = themeContext.colors;
 
   return (
-    <View style={styles(colors).modalContainer}>
+    <View style={styles(colors).modalContainer} testID="NoteListSettings">
       <GallerySetting />
       <ThemeSettings />
     </View>

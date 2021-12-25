@@ -2,16 +2,16 @@ import React from 'react';
 import 'react-native';
 import { render, fireEvent } from '../../../../jest/reduxRender';
 import '@testing-library/jest-dom';
-import NotePreview from '../NotePreview';
+import NotePreviewListFormat from '../NotePreviewListFormat';
 
-describe('NotePreview', () => {
+describe('NotePreviewListFormat', () => {
   it('renders', () => {
     const item = {
       data: { title: 'ex', savedMessage: 'Never saved' },
       id: '2',
     };
 
-    render(<NotePreview info={item} />);
+    render(<NotePreviewListFormat info={item} />);
   });
 
   it('displays the title and saved message', () => {
@@ -20,7 +20,7 @@ describe('NotePreview', () => {
       id: '2',
     };
 
-    const { getByText } = render(<NotePreview info={item} />);
+    const { getByText } = render(<NotePreviewListFormat info={item} />);
 
     getByText('ex');
     getByText('Never saved');
@@ -35,7 +35,7 @@ describe('NotePreview', () => {
     };
 
     const { getByText } = render(
-      <NotePreview info={item} onSelect={fakeOnSelect} />
+      <NotePreviewListFormat info={item} onSelect={fakeOnSelect} />
     );
 
     fireEvent.press(getByText('ex').parent || getByText('ex'));
@@ -52,7 +52,7 @@ describe('NotePreview', () => {
       id: '2',
     };
 
-    const { getByText } = render(<NotePreview info={item} />);
+    const { getByText } = render(<NotePreviewListFormat info={item} />);
 
     getByText(/ABCDEFGHIJKLMNOPQRTUVWZY.../);
   });

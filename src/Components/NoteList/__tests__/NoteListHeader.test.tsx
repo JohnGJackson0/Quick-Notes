@@ -14,7 +14,7 @@ describe('NoteListHeader', () => {
     );
   });
   it('displays the settings when clicked', () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <Host>
         <NoteListHeader />
       </Host>
@@ -22,6 +22,6 @@ describe('NoteListHeader', () => {
 
     fireEvent.press(getByTestId('moreIcon'));
 
-    getByText('Settings');
+    getByTestId('NoteListSettings');
   });
 });

@@ -12,7 +12,6 @@ describe('NoteSettings', () => {
         <NoteSettings />
       </Host>
     );
-    getByText(/Settings/i);
     getByTestId('DeleteNote');
     getByText(/Themes/i);
   });

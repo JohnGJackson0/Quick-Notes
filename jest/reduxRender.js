@@ -1,6 +1,7 @@
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import noteReducer from '../src/Redux/NoteSlice';
+import settingsReducer from '../src/Redux/SettingsSlice';
 import { Provider } from 'react-redux';
 import { render as rntlRender } from '@testing-library/react-native';
 
@@ -9,7 +10,7 @@ function render(
   {
     preloadedState,
     store = configureStore({
-      reducer: { notes: noteReducer },
+      reducer: { notes: noteReducer, settings: settingsReducer },
       preloadedState,
     }),
     ...renderOptions
