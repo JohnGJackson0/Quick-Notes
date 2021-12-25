@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-native';
 import { render } from '../../../../jest/reduxRender';
 import '@testing-library/jest-dom';
-import NoteListSettings from '../NoteListSettings';
+import NoteListSettings from '../../Settings/NoteListSettings/NoteListSettings';
 
 describe('NoteListSettings', () => {
   it('renders', () => {

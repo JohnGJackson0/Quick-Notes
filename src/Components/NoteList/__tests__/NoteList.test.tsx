@@ -16,9 +16,12 @@ describe('NoteList', () => {
     getByText('Notes 0');
   });
 
-  it('properly previews notes', () => {
+  it('properly previews notes in list', () => {
     const { getByText } = render(<NoteList />, {
       preloadedState: {
+        settings: {
+          isGallery: false,
+        },
         notes: {
           notes: [
             {

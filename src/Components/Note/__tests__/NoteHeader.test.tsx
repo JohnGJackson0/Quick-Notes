@@ -22,18 +22,6 @@ describe('NoteHeader', () => {
     );
     getByText(/Notes/i);
   });
-  it('displays note settings on press', async () => {
-    const { getByTestId, getByText } = render(
-      <Host>
-        <NoteHeader />
-      </Host>
-    );
-    fireEvent.press(getByTestId('MoreIcon'));
-
-    await waitFor(() => {
-      getByText(/Settings/i);
-    });
-  });
 
   it('has no icon error with android platform', () => {
     setPlatform('android');

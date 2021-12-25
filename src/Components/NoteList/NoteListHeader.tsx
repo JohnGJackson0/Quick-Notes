@@ -3,11 +3,11 @@ import { Platform, Pressable, StyleSheet } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { ColorsType } from '../../../constants/Colors';
 import Menu from '../../Theme/Menu/Menu';
-import MenuIcon from '../../Theme/Menu/MenuIcon';
+import MenuIcon from '../../Theme/Menu/Icon';
 import { ThemeContext } from '../../Theme/types';
 import { withTheme } from '../../Theme/withTheme';
 import { Portal } from 'react-native-portalize';
-import NoteListSettings from './NoteListSettings';
+import NoteListSettings from '../Settings/NoteListSettings/NoteListSettings';
 
 interface Props {
   themeContext: ThemeContext;

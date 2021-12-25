@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ColorsType } from '../../../constants/Colors';
-import { ThemeContext } from '../../Theme/types';
-import { withTheme } from '../../Theme/withTheme';
-import ThemeSettings from '../Settings/ThemeSettings';
+import { StyleSheet, View } from 'react-native';
+import { ColorsType } from '../../../../constants/Colors';
+import { ThemeContext } from '../../../Theme/types';
+import { withTheme } from '../../../Theme/withTheme';
+import ThemeSettings from '../ThemeSettings';
+import GallerySetting from './GallerySetting';
 
 interface Props {
   themeContext: ThemeContext;
@@ -14,7 +15,7 @@ const NoteListSettings = ({ themeContext }: Props) => {
 
   return (
     <View style={styles(colors).modalContainer}>
-      <Text style={styles(colors).ModalTitle}>Settings</Text>
+      <GallerySetting />
       <ThemeSettings />
     </View>
   );
@@ -25,11 +26,6 @@ const styles = (colors: ColorsType) =>
     modalContainer: {
       backgroundColor: colors.background,
       flex: 1,
-    },
-    ModalTitle: {
-      color: colors.text,
-      fontSize: 20,
-      margin: 10,
     },
   });
 

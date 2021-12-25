@@ -4,12 +4,12 @@ import { Modalize } from 'react-native-modalize';
 import { ColorsType } from '../../../constants/Colors';
 import IconWithLabel from '../../Theme/Menu/IconWithLabel';
 import Menu from '../../Theme/Menu/Menu';
-import MenuIcon from '../../Theme/Menu/MenuIcon';
+import MenuIcon from '../../Theme/Menu/Icon';
 import { ThemeContext } from '../../Theme/types';
 import { withTheme } from '../../Theme/withTheme';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Portal } from 'react-native-portalize';
-import NoteSettings from './NoteSettings/NoteSettings';
+import NoteSettings from '../Settings/NoteSettings/NoteSettings';
 import { useAppDispatch } from '../../Hooks/redux';
 import { updateIsEditing } from '../../Redux/NoteSlice';
 

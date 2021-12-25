@@ -10,14 +10,15 @@ import {
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { RootState } from '../../Redux/store';
 import { withTheme } from '../../Theme/withTheme';
-import NotePreview from './NotePreview';
+import NotePreviewListFormat from './NotePreviewListFormat';
 import Screen from '../../Theme/Screen';
 import { ThemeContext } from '../../Theme/types';
 import { ColorsType } from '../../../constants/Colors';
 import Menu from '../../Theme/Menu/Menu';
 import { NavigationProp, ParamListBase } from '@react-navigation/core';
-import MenuIcon from '../../Theme/Menu/MenuIcon';
+import MenuIcon from '../../Theme/Menu/Icon';
 import { createNote, updateNeverOpened } from '../../Redux/NoteSlice';
+import NotePreviewGalleryFormat from './NotePreviewGalleryFormat';
 
 interface Props {
   themeContext: ThemeContext;
@@ -27,11 +28,11 @@ interface Props {
 const transformNotes = (
   notes: { content: string; savedMessage: string; uid: string }[]
 ): {
-  data: { title: string; savedMessage: string };
+  data: { title: string; savedMessage: string; html: string };
   id: string;
 }[] => {
   const result: {
-    data: { title: string; savedMessage: string };
+    data: { title: string; savedMessage: string; html: string };
     id: string;
   }[] = [];
   notes?.forEach((item) => {
@@ -40,6 +41,7 @@ const transformNotes = (
       data: {
         title: `${stripedHtml.substring(0, 25)}`,
         savedMessage: `${item.savedMessage}`,
+        html: item.content,
       },
       id: `${item.uid}`,
     });
@@ -51,6 +53,7 @@ const NoteList = ({ themeContext, navigation }: Props) => {
   const [listenForNewNoteAddedToRedux, setListenForNewNoteAddedToRedux] =
     useState(false);
   const notes = useAppSelector((state: RootState) => state.notes.notes);
+  const settings = useAppSelector((state: RootState) => state.settings);
   const colors = themeContext.colors;
   const dispatch = useAppDispatch();
 
@@ -97,16 +100,32 @@ const NoteList = ({ themeContext, navigation }: Props) => {
           <MenuIcon iconName="add-circle" /> in the bottom right corner to make
           a note.
         </Text>
+      ) : settings.isGallery ? (
+        <FlatList
+          data={transformNotes(notes)}
+          key={'_'}
+          numColumns={2}
+          renderItem={({
+            item,
+          }: ListRenderItemInfo<{
+            data: { title: string; savedMessage: string; html: string };
+            id: string;
+          }>) => <NotePreviewGalleryFormat info={item} onSelect={onSelect} />}
+          keyExtractor={(item) => item.id}
+          ListFooterComponent={<View style={styles(colors).flatListPadding} />}
+        />
       ) : (
         <FlatList
           data={transformNotes(notes)}
+          key={'*'}
           renderItem={({
             item,
           }: ListRenderItemInfo<{
             data: { title: string; savedMessage: string };
             id: string;
-          }>) => <NotePreview info={item} onSelect={onSelect} />}
+          }>) => <NotePreviewListFormat info={item} onSelect={onSelect} />}
           keyExtractor={(item) => item.id}
+          ListFooterComponent={<View style={styles(colors).flatListPadding} />}
         />
       )}
       <View style={styles(colors).menu}>
@@ -146,6 +165,9 @@ const styles = (colors: ColorsType) =>
       margin: 10,
       marginBottom: 20,
     },
+    flatList: {
+      flex: 1,
+    },
     menu: {
       flex: 1,
       width: '100%',
@@ -159,6 +181,9 @@ const styles = (colors: ColorsType) =>
     },
     add: {
       padding: 5,
+    },
+    flatListPadding: {
+      paddingBottom: 60,
     },
   });
 

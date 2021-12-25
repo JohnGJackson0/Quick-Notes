@@ -10,7 +10,7 @@ interface Props {
   onSelect: (id: string) => void;
 }
 
-const NotePreview = ({ info, themeContext, onSelect }: Props) => {
+const NotePreviewListFormat = ({ info, themeContext, onSelect }: Props) => {
   const colors = themeContext.colors;
   return (
     <Pressable
@@ -48,4 +48,4 @@ const styles = (colors: ColorsType) =>
     },
   });
 
-export default withTheme(NotePreview);
+export default withTheme(NotePreviewListFormat);

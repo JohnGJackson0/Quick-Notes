@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import notesReducer from './NoteSlice';
+import settingsReducer from './SettingsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer } from 'redux-persist';
 
 const rootReducer = combineReducers({
   notes: notesReducer,
+  settings: settingsReducer,
 });
 
 const persistConfig = {
