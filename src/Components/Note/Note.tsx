@@ -70,6 +70,25 @@ const Note = ({ waitTime, themeContext, route }: Props) => {
     setContent(value.html);
   };
 
+  const toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+    ['blockquote', 'code-block'],
+    [{ align: [] }],
+
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ direction: 'rtl' }], // text direction
+
+    [
+      { header: [1, 2, 3, 4, 5, 6, false] },
+      { size: ['small', false, 'large', 'huge'] },
+    ],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+  ];
+
   return (
     <Screen style={styles(colors).screen} scroll={false}>
       <View style={styles(colors).content}>
@@ -109,7 +128,7 @@ const Note = ({ waitTime, themeContext, route }: Props) => {
         >
           <QuillToolbar
             editor={_editor}
-            options="full"
+            options={toolbarOptions}
             theme={themeContext.isLight ? 'light' : 'dark'}
             styles={{
               toolbar: {

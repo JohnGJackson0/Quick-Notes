@@ -22,24 +22,20 @@ describe('Note slice', () => {
     jest.useRealTimers();
   });
 
-  it('should return the intial state', () => {
-    expect(reducer(undefined, {})).toEqual({
-      currentNoteUid: '',
-      notes: [],
-      isEditing: false,
-    });
-  });
-
   it('should change the saved message when edited', () => {
     jest.setSystemTime(new Date(2020, 3, 1));
+
     const previousState = {
       notes: [
         {
           content: 'My content',
           savedMessage: 'This should not be edited',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     };
 
     expect(
@@ -53,8 +49,11 @@ describe('Note slice', () => {
           content: 'only with new content',
           savedMessage: 'Edited on Wed Apr. 1 at 0:00 AM',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     });
   });
 
@@ -66,20 +65,26 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'This should not be edited',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     };
 
     expect(
-      reducer(previousState, saveNote({ content: 'My content', uid: 1 }))
+      reducer(previousState, saveNote({ content: 'My content', uid: '1' }))
     ).toEqual({
       notes: [
         {
           content: 'My content',
           savedMessage: 'This should not be edited',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     });
   });
 
@@ -91,8 +96,11 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'Never saved',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     };
 
     expect(
@@ -103,8 +111,11 @@ describe('Note slice', () => {
           content: 'New content',
           savedMessage: 'Edited on Wed Apr. 1 at 1:30 PM',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     });
   });
 
@@ -116,13 +127,17 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'This should not be edited',
           uid: '1',
+          neverOpened: false,
         },
         {
           content: 'Another content',
           savedMessage: 'Never Saved',
           uid: '2',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     };
 
     expect(
@@ -133,13 +148,17 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'This should not be edited',
           uid: '1',
+          neverOpened: false,
         },
         {
           content: 'change content',
           savedMessage: 'Edited on Wed Apr. 1 at 0:00 AM',
           uid: '2',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '0',
+      isEditing: false,
     });
   });
 
@@ -151,14 +170,17 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'Never saved',
           uid: '1',
+          neverOpened: false,
         },
         {
           content: 'Another content',
           savedMessage: 'Never saved',
           uid: '2',
+          neverOpened: false,
         },
       ],
       currentNoteUid: '2',
+      isEditing: false,
     };
 
     expect(reducer(previousState, deleteCurrentNote())).toEqual({
@@ -167,9 +189,11 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'Never saved',
           uid: '1',
+          neverOpened: false,
         },
       ],
       currentNoteUid: '',
+      isEditing: false,
     });
   });
   it('correctly makes note', () => {
@@ -182,8 +206,11 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'Never saved',
           uid: '1',
+          neverOpened: false,
         },
       ],
+      currentNoteUid: '1',
+      isEditing: false,
     };
 
     expect(reducer(previousState, createNote())).toEqual({
@@ -192,6 +219,7 @@ describe('Note slice', () => {
           content: 'My content',
           savedMessage: 'Never saved',
           uid: '1',
+          neverOpened: false,
         },
         {
           content: '',
@@ -200,6 +228,8 @@ describe('Note slice', () => {
           uid: '00000000-0000-0000-0000-000000000000',
         },
       ],
+      currentNoteUid: '1',
+      isEditing: false,
     });
   });
   it('correctly updated current note', () => {
@@ -208,15 +238,18 @@ describe('Note slice', () => {
         {
           content: 'My content',
           savedMessage: 'Never saved',
+          neverOpened: false,
           uid: '1',
         },
         {
           content: 'Another content',
           savedMessage: 'Never saved',
+          neverOpened: false,
           uid: '2',
         },
       ],
       currentNoteUid: '2',
+      isEditing: false,
     };
 
     expect(reducer(previousState, updateCurrentNote({ uid: '1' }))).toEqual({
@@ -224,15 +257,18 @@ describe('Note slice', () => {
         {
           content: 'My content',
           savedMessage: 'Never saved',
+          neverOpened: false,
           uid: '1',
         },
         {
           content: 'Another content',
           savedMessage: 'Never saved',
+          neverOpened: false,
           uid: '2',
         },
       ],
       currentNoteUid: '1',
+      isEditing: false,
     });
   });
 
@@ -253,6 +289,7 @@ describe('Note slice', () => {
         },
       ],
       currentNoteUid: '2',
+      isEditing: false,
     };
 
     expect(reducer(previousState, updateNeverOpened({ uid: '2' }))).toEqual({
@@ -271,6 +308,7 @@ describe('Note slice', () => {
         },
       ],
       currentNoteUid: '2',
+      isEditing: false,
     });
   });
 

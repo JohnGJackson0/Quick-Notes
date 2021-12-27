@@ -3,7 +3,6 @@ import 'react-native';
 import { render, fireEvent } from '../../../../jest/reduxRender';
 import '@testing-library/jest-dom';
 import NoteList from '../NoteList';
-import * as redux from 'react-redux';
 
 describe('NoteList', () => {
   it('opens when pressing on the note preview in list format', () => {
