@@ -5,11 +5,12 @@ import {
   Pressable,
   View,
   useWindowDimensions,
+  ScrollView,
 } from 'react-native';
 import { ColorsType } from '../../../constants/Colors';
 import { ThemeContext } from '../../Theme/types';
 import { withTheme } from '../../Theme/withTheme';
-import RenderHtml from 'react-native-render-html';
+import HTMLView from 'react-native-htmlview';
 
 interface Props {
   info: {
@@ -32,12 +33,9 @@ const NotePreviewGalleryFormat = ({ info, themeContext, onSelect }: Props) => {
       style={stylesWithDeminsions(colors, height, width).container}
     >
       <View>
-        <View style={styles(colors).htmlPreview}>
-          <RenderHtml
-            source={{ html: info.data.html }}
-            contentWidth={width * 0.6 - 10 - 1000}
-          />
-        </View>
+        <ScrollView style={styles(colors).htmlPreview}>
+          <HTMLView value={info.data.html} />
+        </ScrollView>
         <View style={styles(colors).detailContainer}>
           <Text style={styles(colors).mainText}>
             {info.data.title === ''
@@ -68,6 +66,7 @@ const stylesWithDeminsions = (
       width: width / 2 - 6,
       justifyContent: 'flex-end',
       marginBottom: 8,
+      backgroundColor: colors.background,
     },
   });
 
@@ -82,11 +81,9 @@ const styles = (colors: ColorsType) =>
       fontSize: 18,
     },
     htmlPreview: {
-      flexGrow: 1,
-      width: '100%',
-      height: '60%',
       borderRadius: 10,
       padding: 10,
+      height: '60%',
       backgroundColor: colors.primary,
     },
     detailText: {
